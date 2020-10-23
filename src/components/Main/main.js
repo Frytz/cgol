@@ -234,8 +234,10 @@ class Main extends React.Component {
       //seed onClick helper function
       seed = () => {
         //does not trigger if playstate true
-        if (this.playState !== true) {
+        if (this.playState !== true ) {
+          if (this.seedState !== true){
         //add the seed to be debuffered
+        this.seedState = true;
         let gridCopy = arrayClone(this.state.gridFull);
         for (let i = 0; i < this.rows; i++) {
           for (let j = 0; j < this.cols; j++) {
@@ -251,6 +253,7 @@ class Main extends React.Component {
         });
         }
     }
+  }
 
       //Button onClick helper functions
       playButton = () => {
@@ -273,16 +276,19 @@ class Main extends React.Component {
         // this.playButton();
       }  
       fast = () => {
-        this.speed = 10;
+        this.speed = 1;
         // this.playButton();
       }
       clear = () => {
+        if (this.playState !== true){
+          this.seedState = false;
         var grid = Array(this.rows).fill().map(() => Array(this.cols).fill(false));
         this.setState({
           gridFull: grid,
           generation: 0
         });
       }
+    }
 
       gridSize = (size) => {
         switch (size) {
